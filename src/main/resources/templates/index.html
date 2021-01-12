@@ -18,8 +18,7 @@
         <div class="head_left">　</div>
 
         <div class="head_right">
-            <div style="display:inline-block;vertical-align: top;"><a href="/index.html">回到首页</a></div>
-            　
+
             <div class="dropdown" style="display:inline-block">
               <div th:id="user" th:if="${session.loginUser!=null}" style="background-color: transparent;max-width: 160px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   [[${session.loginUser}]]

@@ -1,9 +1,4 @@
 $(function () {
-    $(".buy").click(function () {
-        if (confirm("确定要购买《" + $("#title").html() + "》吗")){
-            alert("购买成功");
-        }
-    });
 
 
     $("#addToCart").click(function () {
