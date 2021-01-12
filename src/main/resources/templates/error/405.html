@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="ThemeBucket">
+  <link rel="shortcut icon" href="#" type="image/png">
+
+  <title>500 Page</title>
+
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/style-responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/js/html5shiv.js"></script>
+  <script src="/js/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body class="error-page">
+
+<section>
+    <div class="container ">
+
+        <section class="error-wrapper text-center">
+            <h1><img alt="" src="/img/500-error.png"></h1>
+            <h2>OOOPS!!!</h2>
+            <h3 th:text="${error}">方法请求错误</h3>
+            <p class="nrml-txt">当前请求发生错误，<span id="seconds">5</span>秒后返回上一页</p>
+            <a class="back-btn" href="/index.html">回到主页</a>
+        </section>
+
+    </div>
+</section>
+
+<!-- Placed js at the end of the document so the pages load faster -->
+<script src="/js/jquery-1.10.2.min.js"></script>
+<script src="/js/jquery-migrate-1.2.1.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/modernizr.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        djs($("#seconds").text());
+    });
+    function djs(seconds){
+
+        if (seconds > 1){
+            seconds--;
+            $("#seconds").text(seconds);
+            // 定时1秒调用一次
+            setTimeout(function(){
+                djs(seconds);
+            },1000);
+        }else{
+            window.history.back();
+            location.reload();
+        }
+    }
+</script>
+<!--common scripts for all pages-->
+<!--<script src="js/scripts.js"></script>-->
+
+</body>
+</html>

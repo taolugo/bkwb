@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>书籍详情</title>
+    <script src="/js/jquery3.1.1.min.js" type="text/javascript"></script>
+    <script src="/js/util.js" type="text/javascript"></script>
+    <script src="/js/book.js" type="text/javascript"></script>
+    <script src="/js/popper.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
+    <link href="/css/book.css" rel="stylesheet">
+    <link href="/css/bttn.css" rel="stylesheet">
+    <link href="/css/common.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+</head>
+<body>
+    <div id="head">
+        <div class="head_left">　</div>
+
+        <div class="head_right">
+            <div style="display:inline-block;vertical-align: top;"><a href="/index.html">回到首页</a></div>
+            　
+            <div class="dropdown" style="display:inline-block">
+                <div th:id="user" th:if="${session.loginUser!=null}" style="background-color: transparent;max-width: 160px;white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    [[${session.loginUser}]]
+                </div>
+                <div id="items" class="user-svs dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/cart/cart.html">查看购物车</a>
+                    <a class="dropdown-item" href="/order/order.html">我的订单</a>
+                    <a class="dropdown-item" href="/user/exit">注销</a>
+                </div>
+            </div>
+
+            <div style="display:inline-block" th:if="${session.loginUser==null}"><a href="/login.html">登录</a> <a href="/register.html">注册</a></div>
+        </div>
+
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">请输入数量</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-inline">
+                        <div class="form-group mb-2">
+                            <label for="staticText" class="sr-only">数量</label>
+                            <input type="text" readonly class="form-control-plaintext" id="staticText" value="　添加至购物车的数量">
+                        </div>
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="inputCount" class="sr-only">要添加的数量</label>
+                            <input type="number" value="1" max="999" min="1" width="100px" class="form-control" id="inputCount" placeholder="1-999">
+                        </div>
+                        <button id="addToCart" type="submit" th:data="${book.bookId}" class="btn btn-primary mb-2" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="book">
+        <div id="img">
+            <img th:src="${book.image}" width="330" height="440"/>
+        </div>
+
+        <div id="content">
+            <p><h2 id="title">[[${book.bookName}]]</h2><span id="author">[[${book.author}]]</span></p>
+            <p>价格：<span id="price">[[${book.price}]]</span>&nbsp;&nbsp;&nbsp;&nbsp;库存:<span>[[${book.stock}]]</span></p>
+            <p>页数：<span id="p_num">[[${book.page}]]</span></p>
+            <p>出版社：<span id="press">[[${book.press}]]</span></p>
+            <p>出版时间：<span id="time">[[${book.date}]]</span></p>
+            <p>简介：</p>
+            <p id="memo">[[${book.summary}]]</p>
+        </div>
+
+        <div class="bttn-simple bttn-primary buy">购买</div>
+        <div class="bttn-simple bttn-danger addCart" data-toggle="modal" data-target="#staticBackdrop">加入购物车</div>
+
+    </div>
+</body>
+
+    <br><br><br>
+</html>
