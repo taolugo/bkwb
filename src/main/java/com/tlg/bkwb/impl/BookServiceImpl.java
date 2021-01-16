@@ -27,7 +27,7 @@ public class BookServiceImpl extends ServiceImpl<BookMapper,Book> implements Boo
     @Transactional(rollbackFor = Exception.class,isolation=Isolation.READ_COMMITTED)
     public synchronized boolean updateCountQuery(List<Map> mapList) throws MyException{
         for (Map map : mapList) {
-            Integer bookId = (Integer) map.get("bookId");
+            Long bookId = (Long) map.get("bookId");
             Integer count = (Integer) map.get("count");
             Integer stock = bookMapper.getBookStockById(bookId);
 

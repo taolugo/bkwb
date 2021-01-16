@@ -48,8 +48,7 @@ public class OrderController {
      */
     @RequestMapping({"/order/","/order/order.html"})
     public String orderPage(HttpSession session, Model model){
-        String username = (String) session.getAttribute("loginUsername");
-        Integer userId = userService.getIdByUsername(username);
+        Long userId = (Long) session.getAttribute("loginId");
         List<Order> list = orderService.list(new QueryWrapper<Order>().eq("user_id",userId).orderByDesc("create_date"));
         model.addAttribute("orderList",list);
         System.out.println("=============" + list);
@@ -89,7 +88,7 @@ public class OrderController {
             map.put("bookName",book.getBookName());
             map.put("bookPrice",book.getPrice());
             map.put("count", count);
-            BigDecimal price = BigDecimal.valueOf(book.getPrice() * count);
+            BigDecimal price = book.getPrice().multiply(BigDecimal.valueOf(count));
             amount = amount.add(price);
             mapList.add(map);
         }
@@ -104,12 +103,12 @@ public class OrderController {
             return "/error/5xx.html";
         }
 
-
+        Long userId = (Long) session.getAttribute("loginId");
         String detail = JSON.toJSONString(mapList);
         Order order = new Order();
         String id = UUID.randomUUID().toString().replaceAll("-","");
         order.setOrderId(id);
-        order.setUserId(userService.getIdByUsername(loginUser));
+        order.setUserId(userId);
         order.setDetail(detail);
         order.setAmount(amount);
         order.setCreateDate(new Date(System.currentTimeMillis()));
@@ -132,7 +131,7 @@ public class OrderController {
      */
     @RequestMapping("/order/{orderId}")
     public String orderDetail(@PathVariable String orderId,HttpSession session, Model model){
-        Integer userId = (Integer) session.getAttribute("loginId");
+        Long userId = (Long) session.getAttribute("loginId");
         Order order = orderService.getById(orderId);
         if (order.getUserId() == userId){
             model.addAttribute("order",order);
@@ -151,7 +150,7 @@ public class OrderController {
     @Transactional(isolation= Isolation.READ_COMMITTED)
     @PostMapping("/order/pay/{orderId}")
     public String payOrder(@PathVariable String orderId,HttpSession session,Model model){
-        Integer userId = (Integer) session.getAttribute("loginId");
+        Long userId = (Long) session.getAttribute("loginId");
         Order order = orderService.getById(orderId);
 
         System.out.println("in");

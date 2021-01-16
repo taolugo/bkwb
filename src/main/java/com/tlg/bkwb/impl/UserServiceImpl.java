@@ -37,16 +37,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper,User> implements Use
     }
 
     // 更新余额的具体实现
-    public synchronized boolean updBalance(int userId, BigDecimal price) {
+    public synchronized boolean updBalance(Long userId, BigDecimal price) {
         return userMapper.updBalance(userId, price)>0;
     }
 
-    @Override
-    public Integer getIdByUsername(String username) {
-        return userMapper.getIdByUsername(username);
-    }
-
-    public BigDecimal getBalance(Integer id){
+    public BigDecimal getBalance(Long id){
         return userMapper.selectById(id).getBalance();
     }
 }

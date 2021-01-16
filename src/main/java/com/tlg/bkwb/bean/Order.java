@@ -23,26 +23,11 @@ import java.util.Date;
 public class Order {
     @TableId
     private String orderId; //订单编号
-    private Integer userId; //订单归属
+    private Long userId; //订单归属
     private String detail; //订单详情
     private Date createDate; //订单创建日期
     private Date paymentDate; //订单支付日期
     private BigDecimal amount; //总价
     private Integer state; //订单状态 0未支付 1已支付 2已失效
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(Date paymentDate) {
-        this.paymentDate = paymentDate;
-    }
 }

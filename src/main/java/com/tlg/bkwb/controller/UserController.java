@@ -133,7 +133,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/user/getBalance")
     public String getBalance(HttpSession session) {
-        Integer userId = (Integer) session.getAttribute("loginId");
+        Long userId = (Long) session.getAttribute("loginId");
         return userService.getBalance(userId).toString();
     }
 }

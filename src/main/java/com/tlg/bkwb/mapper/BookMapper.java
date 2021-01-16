@@ -13,9 +13,9 @@ import org.apache.ibatis.annotations.Update;
 public interface BookMapper extends BaseMapper<Book> {
     //获取库存
     @Select("Select stock from t_book where book_id=#{bookId}")
-    Integer getBookStockById(Integer bookId);
+    Integer getBookStockById(Long bookId);
 
     //修改库存
     @Update("update t_book set stock=stock-#{count} where book_id=#{bookId}")
-    Integer updStock(Integer bookId, Integer count);
+    Integer updStock(Long bookId, Integer count);
 }

@@ -38,20 +38,6 @@ public class BookController {
         return "index";
     }
 
-//    /**
-//     * 发送商品列表
-//     * @return
-//     */
-//    @ResponseBody
-//    @RequestMapping("/getBooks")
-//    public Map<String, Object> getBooks() {
-//        List<Book> list = bookService.list();
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("books", list);
-//
-//        return map;
-//    }
-
 
     /**
      * 书籍详情页
@@ -60,7 +46,7 @@ public class BookController {
      * @return
      */
     @GetMapping("/book/{id}")
-    public String getBook(@PathVariable Integer id,Model model){
+    public String getBook(@PathVariable Long id,Model model){
         Book book = bookService.getById(id);
         model.addAttribute("book",book);
         return "/book";

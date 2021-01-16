@@ -19,8 +19,8 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 @ToString
 public class User {
-    @TableId(value = "u_id",type = IdType.AUTO)
-    private Integer userId;
+    @TableId(value = "user_id",type = IdType.AUTO)
+    private Long userId;
     private String nickname;
     private String username;
     private String password;

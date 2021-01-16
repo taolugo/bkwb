@@ -22,10 +22,8 @@ public interface UserService extends IService<User> {
     boolean exists(String username);
 
     // 更新余额
-    boolean updBalance(int userId, BigDecimal price);
-
-    Integer getIdByUsername(String username);
+    boolean updBalance(Long userId, BigDecimal price);
 
     //查询余额
-    BigDecimal getBalance(Integer id);
+    BigDecimal getBalance(Long id);
 }

@@ -28,8 +28,8 @@ public interface UserMapper extends BaseMapper<User> {
     int exists(String username);
 
     // 更新余额
-    @Update("update t_user set balance=balance-${price} where u_id=${userId} and balance-${price}>0")
-    int updBalance(int userId, BigDecimal price);
+    @Update("update t_user set balance=balance-${price} where user_id=${userId} and balance-${price}>0")
+    int updBalance(Long userId, BigDecimal price);
 
 
     @Select("Select u_id from t_user where username=#{username}")
